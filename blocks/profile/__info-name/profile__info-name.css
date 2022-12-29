@@ -20,6 +20,9 @@
 @media screen and (max-width: 600px) {
     .profile__info-name {
         margin-top: 26px;
+        font-size: 27px;
+        line-height: 33px;
+        max-width: 200px;
     }
 
 }
