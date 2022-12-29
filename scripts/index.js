@@ -5,12 +5,12 @@ const popup = document.querySelector(".popup");
 const popupBlock = document.querySelector(".popup__block");
 const closePopup = document.querySelector(".popup__close");
 let popupForm = document.querySelector(".popup__form");
-let nameInput = document.querySelector(".popup__input-name");
-let workInput = document.querySelector(".popup__input-work");
+let nameInput = document.querySelector(".popup__input_name");
+let workInput = document.querySelector(".popup__input_work");
 
 buttonEdit.addEventListener("click", (evt) => {
     evt.preventDefault();
-    popup.classList.add("popup__active");
+    popup.classList.add("popup_active");
 
     nameInput.value = profileName.textContent;
     workInput.value = profileText.textContent;
@@ -18,7 +18,7 @@ buttonEdit.addEventListener("click", (evt) => {
 
 closePopup.addEventListener("click", (evt) => {
     evt.preventDefault();
-    popup.classList.remove("popup__active");
+    popup.classList.remove("popup_active");
 });
 
 
@@ -27,6 +27,6 @@ function formSubmit(evt) {
 
     profileName.textContent = nameInput.value;
     profileText.textContent = workInput.value;
-    popup.classList.remove("popup__active");
+    popup.classList.remove("popup_active");
 }
 popupForm.addEventListener("submit", formSubmit);

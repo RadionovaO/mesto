@@ -11,8 +11,17 @@
     padding-top: 15px;
     padding-bottom: 18px;
     margin: 0;
+    border: none;
 }
 
 .popup__save:hover {
     opacity: .8;
+}
+
+@media screen and (max-width: 340px) {
+    .popup__save {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
 }
