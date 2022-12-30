@@ -5,8 +5,8 @@ const popup = document.querySelector(".popup");
 const popupBlock = document.querySelector(".popup__block");
 const closePopup = document.querySelector(".popup__close");
 let popupForm = document.querySelector(".popup__form");
-let nameInput = document.querySelector(".popup__input_name");
-let workInput = document.querySelector(".popup__input_work");
+let nameInput = document.querySelector(".popup__input_type_name");
+let workInput = document.querySelector(".popup__input_type_work");
 
 buttonEdit.addEventListener("click", (evt) => {
     evt.preventDefault();
