@@ -42,7 +42,6 @@ const popupAdd = document.querySelector(".popup_add");
 let popupFormAdd = document.querySelector(".popup__form-add");
 let titleInput = document.querySelector(".popup__input_type_title");
 let linkInput = document.querySelector(".popup__input_type_link");
-//const elements = document.querySelector(".elements");
 let elemImage = document.querySelector(".element__image");
 let elemName = document.querySelector(".element__title");
 const btnLike = document.querySelector(".element__like");
@@ -73,7 +72,6 @@ closeButtons.forEach((button) => {
 //сабмит функция
 function formSubmit(evt) {
     evt.preventDefault();
-
     profileName.textContent = nameInput.value;
     profileText.textContent = workInput.value;
     openClosePopup(popup);
@@ -81,7 +79,7 @@ function formSubmit(evt) {
 popupForm.addEventListener("submit", formSubmit);
 
 //картинки через js
-const popupImage = document.querySelector(".popup__image");
+const popupImage = document.querySelector(".popup_image");
 const bigImage = document.querySelector(".popup__big-image");
 const bigImageTitle = document.querySelector(".popup__image-title");
 const cardBlock = document.querySelector(".elements");
@@ -105,11 +103,12 @@ const cardElement = (name, link) => {
     });
 
     //открыть картинку
-    //card.querySelector("element").addEventListener("click", function (evt) {
-      //  openClosePopup(popupImage);
-      //  bigImage.src = evt.target.src;
-      //  bigImageTitle.textContent = evt.target.textContent;
-    //})
+    card.querySelector(".element__image").addEventListener("click", function () {
+        openClosePopup(popupImage);
+        bigImage.src = link;
+        bigImage.alt = name;
+        bigImageTitle.textContent = name;
+    });
 
     return card;
 };
