@@ -40,8 +40,8 @@ buttonAdd.addEventListener("click", () => {
 });
 
 //закрытие попап
-const buttonClose = document.querySelectorAll(".popup__close");
-buttonClose.forEach((button) => {
+const buttonCloseList = document.querySelectorAll(".popup__close");
+buttonCloseList.forEach((button) => {
     const popup = button.closest(".popup");
     button.addEventListener("click", () => closePopup(popup));
 });
@@ -62,7 +62,7 @@ const imageBigSizeTitle = document.querySelector(".popup__image-title");
 const cardBlock = document.querySelector(".elements");
 
 const cardTemplate = document.querySelector("#cards").content;
-const cardElement = (name, link) => {
+const createCardElement = (name, link) => {
     const card = cardTemplate.cloneNode(true);
     const elemImage = card.querySelector(".element__image");
     const elemName = card.querySelector(".element__title");
@@ -94,7 +94,7 @@ const cardElement = (name, link) => {
 
 function presentCards(card) {
     for (let i = 0; i < card.length; i++) {
-        const createCard = cardElement(initialCards[i].name, initialCards[i].link);
+        const createCard = createCardElement(initialCards[i].name, initialCards[i].link);
         cardBlock.append(createCard);
     };
 };
@@ -103,7 +103,7 @@ presentCards(initialCards);
 //создание карточки
 function submitNewCard(evt) {
     evt.preventDefault();
-    cardBlock.prepend(cardElement(inputTitle.value, inputLink.value));
+    cardBlock.prepend(createCardElement(inputTitle.value, inputLink.value));
     evt.target.reset();
     closePopup(popupAdd);
 };
