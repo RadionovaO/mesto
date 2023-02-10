@@ -41,12 +41,34 @@
                 <button class="popup__close" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
 
-                <form class="popup__form popup__form-edit" action="submit" name="popup__form popup__form-edit">
-                    <input class="popup__input popup__input_type_name" type="text" name="name" value=""
-                        placeholder="Имя">
-                    <input class="popup__input popup__input_type_work" type="text" name="work" value=""
-                        placeholder="Род деятельности">
-                    <button class="popup__save" type="submit">Сохранить</button>
+                <form 
+                class="popup__form popup__form-edit" 
+                action="submit" 
+                name="popup__form popup__form-edit"
+                novalidate>
+                    <input 
+                    class="popup__input popup__input_type_name" 
+                    type="text" 
+                    name="name" 
+                    value="Жак-Ив Кусто"
+                    placeholder="Имя"
+                    required
+                    minlength="2"
+                    maxlength="40"
+                    id="name__input">
+                    <span class="popup__input-error" id="name__input-error"></span>
+                    <input 
+                    class="popup__input popup__input_type_work" 
+                    type="text" 
+                    name="work" 
+                    value="Исследователь океана"
+                    placeholder="Род деятельности"
+                    required
+                    minlength="2"
+                    maxlength="200"
+                    id="work__input">
+                    <span class="popup__input-error" id="work__input-error"></span>
+                    <button class="popup__save popup__save_disabled" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
@@ -56,12 +78,35 @@
                 <button class="popup__close" type="button"></button>
                 <h2 class="popup__title">Новое место</h2>
 
-                <form class="popup__form popup__form-add" action="submit" name="popup__form popup__form-add">
-                    <input class="popup__input popup__input_type_title" type="text" name="title" value=""
-                        placeholder="Название">
-                    <input class="popup__input popup__input_type_link" type="text" name="link" value=""
-                        placeholder="Ссылка на картинку">
-                    <button class="popup__save" type="submit">Создать</button>
+                <form 
+                class="popup__form popup__form-add" 
+                action="submit" 
+                name="popup__form popup__form-add"
+                novalidate>
+
+                    <input 
+                    class="popup__input popup__input_type_title" 
+                    type="text" 
+                    name="title" 
+                    value=""
+                    placeholder="Название"
+                    minlength="2"
+                    maxlength="30"
+                    required
+                    id="title__input">
+                    <span class="popup__input-error" id="title__input-error"></span>
+
+                    <input 
+                    class="popup__input popup__input_type_link" 
+                    type="url" 
+                    name="link" 
+                    value=""
+                    placeholder="Ссылка на картинку"
+                    required
+                    id="link__input">
+                    <span class="popup__input-error" id="link__input-error"></span>
+
+                    <button class="popup__save popup__save_disabled" type="submit">Создать</button>
                 </form>
             </div>
         </div>
@@ -85,7 +130,8 @@
             </div>
         </div>
     </template>
-    <script src="./components/cards.js"></script>
+    <script src="./scripts/cards.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 

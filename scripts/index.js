@@ -23,10 +23,15 @@ const btnDelete = document.querySelector(".element__delete");
 
 function openPopup(popup) {
     popup.classList.add("popup_active");
+    document.addEventListener("mousedown", closePopupOverlay);
+    document.addEventListener("keydown", closePopupEsc);
 };
 
 function closePopup(popup) {
     popup.classList.remove("popup_active");
+    document.removeEventListener("mousedown", closePopupOverlay);
+    document.removeEventListener("keydown", closePopupEsc);
+    
 };
 
 buttonEdit.addEventListener("click", () => {
@@ -100,11 +105,37 @@ function presentCards(card) {
 };
 presentCards(initialCards);
 
+const buttonSave = popupAdd.querySelector(".popup__save");
+
+
+function disableButton() {
+    buttonSave.classList.add("popup__save_disabled");
+    buttonSave.setAttribute("disabled", true);
+};
+
 //создание карточки
 function submitNewCard(evt) {
     evt.preventDefault();
     cardBlock.prepend(createCardElement(inputTitle.value, inputLink.value));
     evt.target.reset();
+    disableButton();
     closePopup(popupAdd);
 };
 popupFormAdd.addEventListener("submit", submitNewCard);
+
+const popup = document.querySelector(".popup");
+
+//закрытие попап по overlay
+function closePopupOverlay(evt) {
+    if (evt.target.classList.contains("popup_active")) {
+        closePopup(evt.target);
+    };
+};
+
+//закрытие попап по esc
+function closePopupEsc(evt) {
+    if (evt.key === "Escape") {
+        const popupActive = document.querySelector(".popup_active");
+        closePopup(popupActive);
+    };
+};
