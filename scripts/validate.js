@@ -1,4 +1,4 @@
-const formValidation = {
+const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     inputSpanSelector: '.popup__input-error',
@@ -13,51 +13,54 @@ function disableSabmit(evt) {
     evt.preventDefault();
 };
 
-function enableValition(formValidation) {
-    const formList = Array.from(document.querySelectorAll(formValidation.formSelector));
+function enableValition(validationConfig) {
+    const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
     
     formList.forEach((form) => {
         form.addEventListener('submit', disableSabmit);
-        form.addEventListener('input', () => {
-            toggleButton(form, formValidation);
+        form.addEventListener('input', (evt) => {
+            hadleFormInput(evt, validationConfig);
+            toggleButton(form, validationConfig);
         });
-        addInputListeners(form, formValidation);
-        toggleButton(form, formValidation);
+        toggleButton(form, validationConfig);
     });
 };
 
-function hadleFormInput(evt, formValidation) {
-    const input = evt.target; 
+const showInputError = (input, validationConfig) => {
+    console.log(input);
     const inputId = input.id;
     const errorInput = document.querySelector(`#${inputId}-error`);
+        input.classList.add(validationConfig.errorClass)
+        errorInput.classList.add(validationConfig.inputErrorClass);
+        errorInput.textContent = input.validationMessage;
+};
+
+const hideInputError = (input, validationConfig) => {
+    const inputId = input.id;
+    const errorInput = document.querySelector(`#${inputId}-error`);
+    input.classList.remove(validationConfig.errorClass)
+    errorInput.classList.remove(validationConfig.inputErrorClass);
+    errorInput.textContent = '';
+
+};
+
+function hadleFormInput(evt, validationConfig) {
+    const input = evt.target;
 
     if (input.validity.valid) {
-        input.classList.remove(formValidation.errorClass)
-        errorInput.classList.remove(formValidation.inputErrorClass);
-        errorInput.textContent = '';
+        hideInputError(input, validationConfig);
     } else {
-        input.classList.add(formValidation.errorClass)
-        errorInput.classList.add(formValidation.inputErrorClass);
-        errorInput.textContent = input.validationMessage;
+        showInputError(input, validationConfig);
     };
 };
 
-function toggleButton(form, formValidation) {
-    const buttonSave = form.querySelector(formValidation.saveButtonSelector);
+
+function toggleButton(form, validationConfig) {
+    const buttonSaveCardForm = form.querySelector(validationConfig.saveButtonSelector);
     const isFormValid = form.checkValidity();
 
-    buttonSave.disabled = !isFormValid;
-    buttonSave.classList.toggle('popup__save_disabled', !isFormValid);
+    buttonSaveCardForm.disabled = !isFormValid;
+    buttonSaveCardForm.classList.toggle('popup__save_disabled', !isFormValid);
 
 };
-
-function addInputListeners(form, formValidation) {
-    const inputList = Array.from(form.querySelectorAll(formValidation.inputSelector));
-
-    inputList.forEach(function (item) {
-        item.addEventListener('input', (evt) => {
-            hadleFormInput(evt, formValidation);
-        });
-    });
-};
-enableValition(formValidation);
+enableValition(validationConfig);

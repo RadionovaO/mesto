@@ -3,8 +3,6 @@ const profileName = document.querySelector(".profile__info-name");
 const profileText = document.querySelector(".profile__info-text");
 const buttonEdit = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_edit");
-const popupBlock = document.querySelector(".popup__block");
-const popupClose = document.querySelector(".popup__close");
 const popupFormProfile = document.querySelector(".popup__form-edit");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputWork = document.querySelector(".popup__input_type_work");
@@ -52,13 +50,13 @@ buttonCloseList.forEach((button) => {
 });
 
 //функция сохранения изменений в профиле
-function submitEditProfile(evt) {
+function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value;
     profileText.textContent = inputWork.value;
     closePopup(popupEdit);
 }
-popupFormProfile.addEventListener("submit", submitEditProfile);
+popupFormProfile.addEventListener("submit", handleProfileFormSubmit);
 
 //картинки через js
 const popupImage = document.querySelector(".popup_image");
@@ -97,33 +95,33 @@ const createCardElement = (name, link) => {
     return card;
 };
 
-function presentCards(card) {
+function presentCardsList(card) {
     for (let i = 0; i < card.length; i++) {
         const createCard = createCardElement(initialCards[i].name, initialCards[i].link);
         cardBlock.append(createCard);
     };
 };
-presentCards(initialCards);
+presentCardsList(initialCards);
 
-const buttonSave = popupAdd.querySelector(".popup__save");
+const buttonSaveCardForm = popupAdd.querySelector(".popup__save");
 
 
-function disableButton() {
-    buttonSave.classList.add("popup__save_disabled");
-    buttonSave.setAttribute("disabled", true);
+function disableCardFormSubmitButton() {
+    buttonSaveCardForm.classList.add("popup__save_disabled");
+    buttonSaveCardForm.attr = "disabled", true;
 };
 
 //создание карточки
-function submitNewCard(evt) {
+function handleCardFormSubmit(evt) {
     evt.preventDefault();
     cardBlock.prepend(createCardElement(inputTitle.value, inputLink.value));
     evt.target.reset();
-    disableButton();
+    disableCardFormSubmitButton();
     closePopup(popupAdd);
 };
-popupFormAdd.addEventListener("submit", submitNewCard);
+popupFormAdd.addEventListener("submit", handleCardFormSubmit);
 
-const popup = document.querySelector(".popup");
+//const popup = document.querySelector(".popup");
 
 //закрытие попап по overlay
 function closePopupOverlay(evt) {
