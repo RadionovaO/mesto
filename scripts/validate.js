@@ -9,21 +9,20 @@ const validationConfig = {
 
 };
 
-function disableSabmit(evt) {
+function disableSubmit(evt) {
     evt.preventDefault();
 };
 
-function enableValition(validationConfig) {
-    
+function enableValidation(validationConfig) { 
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
     formList.forEach((form) => {
-        const buttonSaveCardForm = form.querySelector(validationConfig.saveButtonSelector);
-        form.addEventListener('submit', disableSabmit);
+        const buttonSubmit = form.querySelector(validationConfig.saveButtonSelector);
+        form.addEventListener('submit', disableSubmit);
         form.addEventListener('input', (evt) => {
             hadleFormInput(evt, validationConfig);
-            toggleButton(form, validationConfig, buttonSaveCardForm);
+            toggleButton(form, validationConfig, buttonSubmit);
         });
-        toggleButton(form, validationConfig, buttonSaveCardForm);
+        toggleButton(form, validationConfig, buttonSubmit);
     });
 };
 
@@ -55,12 +54,12 @@ function hadleFormInput(evt, validationConfig) {
 };
 
 
-function toggleButton(form, validationConfig, buttonSaveCardForm) {
+function toggleButton(form, validationConfig, buttonSubmit) {
     
     const isFormValid = form.checkValidity();
     
-    buttonSaveCardForm.disabled = !isFormValid;
-    buttonSaveCardForm.classList.toggle(validationConfig.disabledButtonClass, !isFormValid);
+ buttonSubmit.disabled = !isFormValid;
+ buttonSubmit.classList.toggle(validationConfig.disabledButtonClass, !isFormValid);
 
 };
-enableValition(validationConfig);
+enableValidation(validationConfig);

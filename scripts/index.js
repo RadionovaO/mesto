@@ -66,33 +66,33 @@ const cardBlock = document.querySelector(".elements");
 
 const cardTemplate = document.querySelector("#cards").content;
 const createCardElement = (name, link) => {
-    const cardList = cardTemplate.cloneNode(true);
-    const elemImage = cardList.querySelector(".element__image");
-    const elemName = cardList.querySelector(".element__title");
+    const card = cardTemplate.cloneNode(true);
+    const elemImage = card.querySelector(".element__image");
+    const elemName = card.querySelector(".element__title");
 
     elemImage.src = link;
     elemImage.alt = name;
     elemName.textContent = name;
 
     //лайк карточки
-    cardList.querySelector(".element__like").addEventListener("click", function (evt) {
+    card.querySelector(".element__like").addEventListener("click", function (evt) {
         evt.target.classList.toggle("element__like_active");
     });
 
     //удаление карточки
-    cardList.querySelector(".element__delete").addEventListener("click", function (evt) {
+    card.querySelector(".element__delete").addEventListener("click", function (evt) {
         evt.target.closest(".element").remove();
     });
 
     //открыть картинку
-    cardList.querySelector(".element__image").addEventListener("click", function () {
+    card.querySelector(".element__image").addEventListener("click", function () {
         openPopup(popupImage);
         imageBigSize.src = link;
         imageBigSize.alt = name;
         imageBigSizeTitle.textContent = name;
     });
 
-    return cardList;
+    return card;
 };
 
 function presentCardsList(cardList) {
