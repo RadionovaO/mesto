@@ -24,3 +24,15 @@ const initialCards = [
         link: 'https://cameralabs.org/media/camera/aprel/23aprel/23_70314773d277c4ace8cf8ffaabcbd4dd.jpg'
     }
 ];
+
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    inputSpanSelector: '.popup__input-error',
+    saveButtonSelector: '.popup__save',
+    disabledButtonClass: 'popup__save_disabled',
+    inputErrorClass: 'popup__input-error_active',
+    errorClass: 'popup__input_type_error'
+};
+
+export { initialCards, validationConfig };
