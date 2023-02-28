@@ -50,7 +50,6 @@ export default class Card {
         this._btnDelete.addEventListener('click', () => this._deleteCard());
         this._elemImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
             
-    };
-    
+    };  
 };
 

@@ -30,7 +30,6 @@ export default class FormValidator {
 
     //добавляет класс ошибкой
     _showInputError = (input) => {
- 
         this._input.classList.add( this._validationConfig.errorClass)
         this._errorInput.classList.add(this._validationConfig.inputErrorClass);
         this._errorInput.textContent = this._input.validationMessage;
@@ -38,7 +37,6 @@ export default class FormValidator {
 
     //удаляет класс с ошибкой
     _hideInputError = (input) => {
-  
         this._input.classList.remove( this._validationConfig.errorClass)
         this._errorInput.classList.remove( this._validationConfig.inputErrorClass);
         this._errorInput.textContent = '';
@@ -48,7 +46,7 @@ export default class FormValidator {
     _hadleFormInput(evt) {
         this._input = evt.target;
         this._inputId = this._input.id;
-        this._errorInput = document.querySelectorAll(`#${this._inputId}-error`);
+        this._errorInput = document.querySelector(`#${this._inputId}-error`);
         if (this._input.validity.valid) {
             this._hideInputError(this._input);
         } else {
@@ -60,7 +58,6 @@ export default class FormValidator {
     _toggleButton() {
         this._buttonSubmit = this._formElement.querySelector(this._validationConfig.saveButtonSelector);
         this._isFormValid = this._formElement.checkValidity();
-    
         this._buttonSubmit.disabled = !this._isFormValid;
         this._buttonSubmit.classList.toggle(this._validationConfig.disabledButtonClass, !this._isFormValid);
     };
