@@ -11,7 +11,8 @@ export default class FormValidator {
         this._disabledButtonClass = validationConfig.disabledButtonClass;
         this._inputErrorClass = validationConfig.inputErrorClass;
         this._errorClass = validationConfig.errorClass;
-        this._input = this._formElement.querySelectorAll(this._inputSelector);
+        //this._input = this._formElement.querySelector(this._inputSelector);
+        this._inputList = this._formElement.querySelectorAll(this._inputSelector);
     }
 
     _disableSubmit(evt) {
@@ -30,23 +31,23 @@ export default class FormValidator {
 
     //добавляет класс ошибкой
     _showInputError = (input) => {
-        this._input.classList.add( this._validationConfig.errorClass)
+        this._errorInput = document.querySelector(`#${input.id}-error`);
+        input.classList.add(this._validationConfig.errorClass)
         this._errorInput.classList.add(this._validationConfig.inputErrorClass);
         this._errorInput.textContent = this._input.validationMessage;
     };
 
     //удаляет класс с ошибкой
     _hideInputError = (input) => {
-        this._input.classList.remove( this._validationConfig.errorClass)
-        this._errorInput.classList.remove( this._validationConfig.inputErrorClass);
+        this._errorInput = document.querySelector(`#${input.id}-error`);
+        input.classList.remove(this._validationConfig.errorClass)
+        this._errorInput.classList.remove(this._validationConfig.inputErrorClass);
         this._errorInput.textContent = '';
     };
 
     //проверяет валидность поля
     _hadleFormInput(evt) {
         this._input = evt.target;
-        this._inputId = this._input.id;
-        this._errorInput = document.querySelector(`#${this._inputId}-error`);
         if (this._input.validity.valid) {
             this._hideInputError(this._input);
         } else {
@@ -61,4 +62,12 @@ export default class FormValidator {
         this._buttonSubmit.disabled = !this._isFormValid;
         this._buttonSubmit.classList.toggle(this._validationConfig.disabledButtonClass, !this._isFormValid);
     };
+    
+    resetValidation() {
+        this._toggleButton();
+        this._inputList.forEach((input) => {
+            this._hideInputError(input);
+        }); 
+    };
+    
 };

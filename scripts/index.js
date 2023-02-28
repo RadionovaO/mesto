@@ -28,17 +28,19 @@ function closePopup(popup) {
     popup.classList.remove('popup_active');
     document.removeEventListener('mousedown', closePopupOverlay);
     document.removeEventListener('keydown', closePopupEsc);
-    
 };
 
 buttonEdit.addEventListener('click', () => {
     inputName.value = profileName.textContent;
     inputWork.value = profileText.textContent;
     openPopup(popupEdit);
+    profileValidation.resetValidation();
 });
 
 buttonAdd.addEventListener('click', () => {
     openPopup(popupAdd);
+    addCardValidation.resetValidation();
+    popupFormAdd.reset();
 });
 
 //закрытие попап
@@ -73,13 +75,6 @@ initialCards.forEach((card) => {
     cardBlock.append(createCard(card, '#cards', handleCardClick));
 });
 
-const buttonSaveCardForm = popupAdd.querySelector('.popup__save');
-
-function disableCardFormSubmitButton() {
-    buttonSaveCardForm.classList.add('popup__save_disabled');
-    buttonSaveCardForm.disabled = true;
-};
-
 //создание карточки
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
@@ -90,7 +85,6 @@ function handleCardFormSubmit(evt) {
         },
         '#cards', handleCardClick));
     evt.target.reset();
-    disableCardFormSubmitButton();
     closePopup(popupAdd);
 };
 popupFormAdd.addEventListener('submit', handleCardFormSubmit);
@@ -120,6 +114,7 @@ function handleCardClick(name, link) {
 //валидация
 const profileValidation = new FormValidator(validationConfig, popupFormProfile);
 profileValidation.enableValidation();
+
 
 const addCardValidation = new FormValidator(validationConfig, popupFormAdd);
 addCardValidation.enableValidation();
