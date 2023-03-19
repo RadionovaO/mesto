@@ -14,13 +14,24 @@ export default class PopupWithForm extends Popup {
         return this._formValues;
     };
 
+    setInputValues(data) {
+        this._inputValues.forEach((input) => {
+          input.value = data[input.name];
+        });
+    };
+
     setEventListeners() {
         super.setEventListeners();
-        //this._formValues = {};
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleProfileFormSubmit(this._getInputValues());
         });
+    };
+
+    close() {
+        
+        this._popupForm.reset();
+        super.close();
     };
 };
 

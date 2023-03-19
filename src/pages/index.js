@@ -46,13 +46,9 @@ const popupEdit = new PopupWithForm('.popup_edit', {
 });
 popupEdit.setEventListeners();
 
-const inputName = document.querySelector('.popup__input_type_title');
-const inputWork = document.querySelector('.popup__input_type_link');
-
 buttonEdit.addEventListener('click', () => {
-    const { name, work } = userInfo.getUserInfo();
-    inputName.value = name;
-    inputWork.value = work;
+    const user = userInfo.getUserInfo();
+    popupEdit.setInputValues(user);
     popupEdit.open();
     profileValidation.resetValidation();
 });
@@ -73,7 +69,6 @@ popupAdd.setEventListeners();
 buttonAdd.addEventListener('click', () => {
     popupAdd.open();
     addCardValidation.resetValidation();
-    popupFormAdd.reset();
 });
 
 const popupFormProfile = document.querySelector('.popup__form-edit');

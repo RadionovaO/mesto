@@ -11,8 +11,8 @@ export default class FormValidator {
         this._disabledButtonClass = validationConfig.disabledButtonClass;
         this._inputErrorClass = validationConfig.inputErrorClass;
         this._errorClass = validationConfig.errorClass;
-        //this._input = this._formElement.querySelector(this._inputSelector);
         this._inputList = this._formElement.querySelectorAll(this._inputSelector);
+        this._buttonSubmit = this._formElement.querySelector(this._validationConfig.saveButtonSelector);
     }
 
     _disableSubmit(evt) {
@@ -20,13 +20,7 @@ export default class FormValidator {
     };
 
     enableValidation() {
-        this._formElement.addEventListener('submit', this._disableSubmit);
-        this._formElement.addEventListener('input', (evt) => {
-             this._hadleFormInput(evt);
-             this._toggleButton(this._formElement, this._validationConfig.buttonSubmit);
-         });
-        
-        this._toggleButton(this._formElement, this._validationConfig.buttonSubmit);       
+        this._setEventListeners();  
     };
 
     //добавляет класс ошибкой
@@ -57,7 +51,6 @@ export default class FormValidator {
 
     //переключает кнопку
     _toggleButton() {
-        this._buttonSubmit = this._formElement.querySelector(this._validationConfig.saveButtonSelector);
         this._isFormValid = this._formElement.checkValidity();
         this._buttonSubmit.disabled = !this._isFormValid;
         this._buttonSubmit.classList.toggle(this._validationConfig.disabledButtonClass, !this._isFormValid);
@@ -70,4 +63,13 @@ export default class FormValidator {
         }); 
     };
     
+    _setEventListeners() {
+        this._toggleButton();
+        this._formElement.addEventListener('submit', this._disableSubmit);
+        this._formElement.addEventListener('input', (evt) => {
+             this._hadleFormInput(evt);
+             this._toggleButton(this._formElement, this._validationConfig.buttonSubmit);
+         });
+
+    }
 };
