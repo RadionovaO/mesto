@@ -20,15 +20,15 @@ export default class UserInfo {
         this._work.textContent = userData.about;
     };
 
-    setAvatar(link) {
-        this._avatar.src = link.avatar;
+    setAvatar(avatar) {
+        this._newAvatar.src = avatar;
     };
 
     getUserId() {
-        return this._id;
+        return this._myId;
     };
 
-    setUserId(id) {
-        this._id = id;
+    setUserId(myId) {
+        this._myId = myId;
     };
 };

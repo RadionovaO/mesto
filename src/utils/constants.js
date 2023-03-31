@@ -1,4 +1,4 @@
-const initialCards = [
+/*const initialCards = [
     {
         name: 'Турция',
         link: 'https://cameralabs.org/media/camera/aprel/23aprel/23_e5b30413698d2f3d2b4bb9664d13b780.jpg'
@@ -24,7 +24,7 @@ const initialCards = [
         link: 'https://cameralabs.org/media/camera/aprel/23aprel/23_70314773d277c4ace8cf8ffaabcbd4dd.jpg'
     }
 ];
-
+*/
 const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -35,4 +35,4 @@ const validationConfig = {
     errorClass: 'popup__input_type_error'
 };
 
-export { initialCards, validationConfig };
+export { validationConfig };

@@ -36,7 +36,7 @@ export default class Api {
 
     //изменение данных пользователя
     changeUserInfo(userData) {
-        return fetch(`${this.baseUrl}/users/me`, {
+        return fetch(`${this.baseUrl}c`, {
             method: 'PATCH',
             headers: this.headers,
 
@@ -103,6 +103,40 @@ export default class Api {
         });
     };
 
+    //удаление карточки
+    deleteCard(cardId) {
+        console.log(cardId);
+        return fetch(`${this.baseUrl}/cards/${cardId}`, {
+          method: 'DELETE',
+          headers: this.headers,
+          'Content-Type': 'application/json',
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
+      }
+
     //изменение аватара
+    changeAvatar(avatar) {
+        return fetch(`${this.baseUrl}/users/me/avatar`, {
+          method: 'PATCH',
+          headers: this.headers,
+            'Content-Type': 'application/json',
+          
+            body: JSON.stringify({
+                avatar: avatar.newAvatar,
+            }),
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
+      }
+
    
 }
