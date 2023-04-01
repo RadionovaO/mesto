@@ -3,14 +3,13 @@ import { Popup } from "./Popup.js";
 export default class PopupWithSubmit extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
-       // this._handleProfileFormSubmit = handleProfileFormSubmit;
         this._popupForm = this._popup.querySelector('.popup__form');
+        this._buttonSubmit = this._popup.querySelector('.popup__save');
     };
 
     renderLoading(text) {
         this._buttonSubmit.textContent = text;
     };
-
 
     open(card, myId) {
         super.open();
@@ -22,7 +21,6 @@ export default class PopupWithSubmit extends Popup {
         this._handleProfileFormSubmit = submitCallback;
     }
     
-
     setEventListeners() {
         super.setEventListeners();
         this._popupForm.addEventListener('submit', (evt) => {
@@ -30,4 +28,4 @@ export default class PopupWithSubmit extends Popup {
             this._handleProfileFormSubmit(this._card, this._myId);
         });
     }; 
-}
+};

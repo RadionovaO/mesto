@@ -2,6 +2,7 @@ export default class Api {
     constructor({ baseUrl, headers }) {
         this.baseUrl = baseUrl;
         this.headers = headers;
+        //this.authorization = headers.authorization;
     };
 
     
@@ -36,7 +37,7 @@ export default class Api {
 
     //изменение данных пользователя
     changeUserInfo(userData) {
-        return fetch(`${this.baseUrl}c`, {
+        return fetch(`${this.baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this.headers,
 
@@ -105,7 +106,6 @@ export default class Api {
 
     //удаление карточки
     deleteCard(cardId) {
-        console.log(cardId);
         return fetch(`${this.baseUrl}/cards/${cardId}`, {
           method: 'DELETE',
           headers: this.headers,
@@ -120,14 +120,15 @@ export default class Api {
       }
 
     //изменение аватара
-    changeAvatar(avatar) {
+    changeAvatar(data) {
+        console.log(this.headers);
         return fetch(`${this.baseUrl}/users/me/avatar`, {
           method: 'PATCH',
           headers: this.headers,
             'Content-Type': 'application/json',
           
             body: JSON.stringify({
-                avatar: avatar.newAvatar,
+                avatar: data.link,
             }),
         })
         .then((res) => {

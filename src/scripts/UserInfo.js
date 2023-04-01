@@ -3,7 +3,7 @@ export default class UserInfo {
         this._name = document.querySelector(nameSelector);
         this._work = document.querySelector(workSelector);
         this.getUserId = this.getUserId.bind(this);
-        this._avatar = document.querySelector(avatarSelector);
+        this._newAvatar = document.querySelector(avatarSelector);
         
     };
 
@@ -19,9 +19,9 @@ export default class UserInfo {
         this._name.textContent = userData.name;
         this._work.textContent = userData.about;
     };
-
+ 
     setAvatar(avatar) {
-        this._newAvatar.src = avatar;
+        this._newAvatar.src = avatar.avatar;
     };
 
     getUserId() {

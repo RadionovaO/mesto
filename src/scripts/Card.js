@@ -70,8 +70,8 @@ export default class Card {
 
     //удаление карточки
     deleteOneCard() {
-        this._cardElement.remove();
-        this._cardElement = null; 
+        this._card.remove();
+        this._card = null; 
     }
 
     //слушатели
@@ -80,8 +80,6 @@ export default class Card {
 
         if (this._ownerId === this._myId) {
             this._btnDelete.addEventListener('click',() => this._openPopupDel(this))
-               // this._openPopupDel(this.deleteCard);
-            
         } else { 
             this._btnDelete.remove();
         }
