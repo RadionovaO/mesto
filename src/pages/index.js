@@ -26,20 +26,16 @@ const userInfo = new UserInfo({
     avatarSelector: '.profile__avatar'
 });
 
-//получаем карточки
-api.getInitialCards()
-    .then((arr) => cardBlock.renderItems(arr));
-
-api.getUserInfo()
-    .then((res) => {
-        userInfo.setUserInfo(res);
-        userInfo.setAvatar(res);
-        myId = res._id;
-    })
+Promise.all([api.getUserInfo(), api.getInitialCards()])  
+        .then(([usersData, cardSection]) => {
+        userInfo.setUserInfo(usersData);
+        userInfo.setAvatar(usersData);
+        myId = usersData._id;
+        cardBlock.renderItems(cardSection.reverse());
+    }) 
     .catch((err) => {
-        console.log(err)
-    });
-
+        console.log(err);
+}) 
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
@@ -159,6 +155,7 @@ buttonAdd.addEventListener('click', () => {
 //изменение аватара
 const popupAvatar = new PopupWithForm('.popup_avatar', {
     handleProfileFormSubmit: (newAvatar) => {
+        popupAvatar.renderLoading('Сохранение...');
         api.changeAvatar(newAvatar)
             .then((avatar) => {
                 userInfo.setAvatar(avatar);
@@ -167,6 +164,7 @@ const popupAvatar = new PopupWithForm('.popup_avatar', {
             .catch((err) => {
                 console.log(err);
             })
+            .finally(() => popupAvatar.renderLoading('Сохранить'));
     }
 });
 popupAvatar.setEventListeners();
